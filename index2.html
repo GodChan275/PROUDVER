@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduConnect - ข่าวสารการศึกษา</title>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { font-family: "Bai Jamjuree", sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #fff9b0, #ffd1dc, #f5a9ff);
+}
+
+header {
+  background: linear-gradient(135deg, #ffe7f7, #ffddee, #fff6b7);
+  text-align: center;
+  padding: 3rem 1rem;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+header h1 { font-size: 40px; color: #7a4c94; margin-bottom: 0.5rem; }
+header p { font-size: 18px; color: #a868b0; }
+
+nav {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0 0 20px 20px;
+}
+
+nav a {
+  color: #7a4c94;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 17px;
+  transition: 0.3s;
+}
+nav a:hover { color: #ff6fa8; }
+
+/* ✅ ปรับ layout เป็นแนวนอน */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 2rem auto;
+  max-width: 1200px;
+  gap: 1.5rem;
+}
+
+/* 🔹 สไลด์ข่าวหลัก */
+.slider-container {
+  flex: 2; /* ใช้พื้นที่ใหญ่กว่า */
+  height: 450px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.slide-track {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.slide-track img {
+  width: 25%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-controls button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+#prevBtn { left: 10px; }
+#nextBtn { right: 10px; }
+
+.news-title {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  color: #7a4c94;
+  border-radius: 0 0 15px 15px;
+}
+
+/* 🔹 ข่าวย่อย */
+.side-news {
+  flex: 1; /* ขนาดเล็กกว่า */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.news-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.news-card:hover { transform: translateY(-5px); }
+.news-card img { width: 100%; height: 120px; object-fit: cover; }
+.news-card .info { padding: 10px; }
+.news-card h3 { font-size: 16px; margin: 5px 0; color: #7a4c94; }
+.news-card small { color: gray; }
+
+footer {
+  background: linear-gradient(135deg, #ffe7f7, #ffddee, #fff6b7);
+  color: #7a4c94;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 20px 20px 0 0;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>สภาไซต์</h1>
+  <p>ศูนย์รวมข่าวการศึกษา มหาวิทยาลัย และการแข่งขันอิสระ</p>
+</header>
+
+<nav>
+  <a href="#">หน้าหลัก</a>
+  <a href="#">ศึกษาต่อ</a>
+  <a href="#">การแข่งขัน</a>
+  <a href="#">ประชาสัมพันธ์</a>
+  <a href="#">ติดต่อเรา</a>
+</nav>
+
+<!-- ✅ Layout: สไลด์ทางซ้าย, ข่าวย่อยทางขวา -->
+<div class="container">
+
+  <div class="slider-container">
+      <div class="slide-track" id="slideTrack">
+          <img src="images/img1.jpg" alt="ภาพสไลด์ 1">
+          <img src="images/img2.jpg" alt="ภาพสไลด์ 2">
+          <img src="images/img3.jpg" alt="ภาพสไลด์ 3">
+          <img src="images/img4.jpg" alt="ภาพสไลด์ 4">
+      </div>
+      <div class="slider-controls">
+          <button id="prevBtn">❮</button>
+          <button id="nextBtn">❯</button>
+      </div>
+      <div class="news-title">
+        📢 ข่าวเด่น: เปิดรับสมัคร TCAS รอบ Portfolio แล้ววันนี้!
+      </div>
+  </div>
+
+  <div class="side-news">
+    <div class="news-card">
+      <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=600" alt="นักศึกษาอ่านหนังสือ">
+      <div class="info">
+        <h3>มหาวิทยาลัยราชภัฏเปิดรับสมัครรอบใหม่</h3>
+        <small>📅 2 พฤศจิกายน 2568</small>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?w=600" alt="แข่งขันคอมพิวเตอร์">
+      <div class="info">
+        <h3>การแข่งขันคอมพิวเตอร์ระดับประเทศ 2025</h3>
+        <small>📅 5 พฤศจิกายน 2568</small>
+      </div>
+    </div>
+
+    <div class="news-card">
+      <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600" alt="นักศึกษาได้รับทุน">
+      <div class="info">
+        <h3>เปิดโอกาสสมัครทุนการศึกษาใหม่</h3>
+        <small>📅 6 พฤศจิกายน 2568</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 สภาไซต์ | Made by (นายศุภกร ปานหลุมข้าว) ❤️</p>
+</footer>
+
+<script>
+const slideTrack = document.getElementById('slideTrack');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const totalSlides = 4;
+let currentSlide = 0;
+
+function updateSlide() {
+  const offset = currentSlide * -25;
+  slideTrack.style.transform = `translateX(${offset}%)`;
+}
+
+nextBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  updateSlide();
+});
+
+prevBtn.addEventListener('click', () => {
+  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+  updateSlide();
+});
+
+updateSlide();
+</script>
+
+</body>
+</html>
